@@ -1,0 +1,68 @@
+#
+# Pdb docs
+#
+#Display instance variables (usage "pi classInst")
+alias lv for k in %1.__dict__.keys(): print "%1.",k,"=",%1.__dict__[k]
+#List instance variables in self
+alias ls lv self
+
+#
+# http://nedbatchelder.com/blog/200704/my_pdbrc.html
+#
+# Next and list, and step and list.
+alias f n;;l
+alias e s;;l
+
+#
+# https://programmingrux.wordpress.com/tag/pdbrc/
+#
+#Display (all) local variable(s)
+alias al pp locals()
+alias dl pp locals()['%1']
+
+#Print a global Variable
+alias ag pp globals()
+alias dg pp globals()['%1']
+
+#Show a local Object mamber variable
+alias so pp locals()['%1'].%2
+#Display a global Object mamber variable
+alias do pp globals()['%1'].%2 
+
+#
+# https://wiki.python.org/moin/PdbRcIdea
+#
+# .pdbrc only allows for debugger commands; you cannot insert Python
+# scripts.
+# To overcome this restriction, this .pdbrc executes ~/.pdbrc.py,
+# which can contain arbitrary Python commands (including a call to a
+# local pdbrc.py (no leading dot!) in your working directory if it
+# exists).
+# If ~/.pdbrc.py is missing, you get an error message (which doesn't
+# hurt).
+execfile(os.path.expanduser("~/.pdbrc.py"))
+
+#
+# https://code.activestate.com/recipes/498182/
+#
+# save this in .pdbrc in your home directory
+import os
+import sys
+# import rlcompleter early, as it contains side effects
+import rlcompleter
+# refresh the terminal
+os.system("stty sane")
+# this rc file takes single lines, so define our complete function here
+execfile(os.path.expanduser("~/.pdbrc.py"))
+# replace the Pdb class's complete method with ours
+sys._getframe(1).f_globals['Pdb'].complete = complete
+# set use_rawinput to 1 as tab completion relies on rawinput being used
+sys._getframe(1).f_locals['self'].use_rawinput = 1
+ 
+#
+# https://www.wildcardcorp.com/blog/python-debugging-primer 
+#
+alias v dir(%1) 
+
+# this should be much easier to type
+alias g until

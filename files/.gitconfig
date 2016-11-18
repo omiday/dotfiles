@@ -1,0 +1,39 @@
+[include]
+    path = ~/.gitconfig-user
+
+[log]
+    #date = local
+
+[core]
+    askpass = /usr/libexec/openssh/gnome-ssh-askpass
+
+[push]
+    default = simple
+
+[alias]
+   bl = blame
+   br = branch
+   ci = commit
+   ca = commit --amend
+   cl = clone
+   co = checkout
+   cp = cherry-pick
+   d = diff
+   dn = diff --name-only
+   ds = diff --staged
+   dump = cat-file -p
+   h = log --stat --summary
+   hr = log --walk-reflogs
+   hs = log --pretty=format:\"%h %<(24)%ad | %w(125,0,35)%s%d [%an]\" --graph --date=local
+   l = log -1 HEAD
+   ls = ls-files
+   lt = ls-tree
+   r = reflog show --source
+   rf = reflog show --follow
+   s = status
+   sh = show
+   type = cat-file -t
+   undo = checkout --
+   untrack = rm -r --cache --
+
+# vim: tw=0 fo=cq
